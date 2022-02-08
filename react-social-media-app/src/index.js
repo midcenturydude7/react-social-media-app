@@ -1,20 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
 
-const Header = (props) => {
-    return <h1>Hello, {props.username}!</h1>;
-};
-
-function Layout(props) {
-    return <div style={{ background: "palegoldenrod" }}>{props.children}</div>;
+function App() {
+    const people = ["Matt", "Henry", "Felix", "Finn", "Corrie"];
+    return (
+        <ol>
+            {people.map(person => (
+            <li><h1>{person}</h1></li>
+            ))}
+        </ol>
+    );
 }
 
 const rootNode = document.getElementById('root');
-
-ReactDOM.render(
-    <Layout>
-        <Header username="Matt" />
-        <footer>Copyright 2022</footer>
-    </Layout>,
-    rootNode
-);
+ReactDOM.render(<App />, rootNode);
