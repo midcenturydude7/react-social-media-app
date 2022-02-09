@@ -2,13 +2,39 @@ import React from 'react';
 import ReactDOM from 'react-dom'
 
 function App() {
-    const people = ["Matt", "Henry", "Felix", "Finn", "Corrie"];
+    const [developerInfo, setDeveloperInfo] = React.useState({
+        language: "python",
+        yearsExperience: 0
+    })
+
+function handleChangeLanguage() {
+    setDeveloperInfo({
+        language: "javascript",
+        yearsExperience: 0
+    });
+}
+
+function handleChangeYearsExperience(event) {
+    setDeveloperInfo({
+        ...developerInfo,
+        yearsExperience: event.target.value
+        });
+}
+
     return (
-        <ol>
-            {people.map(person => (
-            <li><h1>{person}</h1></li>
-            ))}
-        </ol>
+        <div>
+            <button onClick={handleChangeLanguage}
+            >Change language
+            </button>
+            <div>
+                <input 
+                    type="number"
+                    onChange={handleChangeYearsExperience}
+                />
+            </div>
+                <p>I am learning the following language: {developerInfo.language}</p>
+                <p>I have the following years of experience as a developer: {developerInfo.yearsExperience}</p>
+        </div>
     );
 }
 
