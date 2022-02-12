@@ -5,6 +5,9 @@ import CreatePost from './components/CreatePost'
 import PostList from './components/PostList'
 
 export const UserContext = React.createContext();
+export const PostContext = React.createContext({
+    posts: []
+});
 
 function App() {
     const [user, setUser] = React.useState('Matt')
