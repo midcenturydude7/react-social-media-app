@@ -20,13 +20,6 @@ function App() {
         document.title = user ? `${user}'s Feed` : 'Please login';
     }, [user]);
 
-    // const handleAddPost = React.useCallback(
-    //     newPost => {
-    //         setPosts([newPost, ...state.posts]);
-    //     },
-    //     [state.posts]
-    // );
-
     if (!user) {
         return <Login setUser={setUser} />;
     }
