@@ -2,6 +2,9 @@ import React from "react";
 import { UserContext } from '../App'
 
 function Post({ image, content, user }) {
+    const currentUser = React.useContext(UserContext);
+    const isCurrentUser = currentUser === user;
+
     return (
         <UserContext.Consumer>
             {currentUser => (
@@ -14,7 +17,7 @@ function Post({ image, content, user }) {
                 />
             )}
             <p>{content}</p>
-            <div style={{color: currentUser === user && 'green' }}>{user}</div>
+            <div style={{color: isCurrentUser && 'green' }}>{user}</div>
             </>
             )}
         </UserContext.Consumer>
