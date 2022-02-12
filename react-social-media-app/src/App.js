@@ -2,14 +2,23 @@ import React from "react";
 import Login from './components/Login'
 import Header from './components/Header'
 import CreatePost from './components/CreatePost'
+import PostList from './components/PostList'
 
 function App() {
     const [user, setUser] = React.useState('Matt')
     const [posts, setPosts] = React.useState([]);
+    const [count, setCount] = React.useState(0);
 
     React.useEffect(() => {
         document.title = user ? `${user}'s Feed` : 'Please login';
     }, [user]);
+
+    const handleAddPost = React.useCallback(
+        newPost => {
+            setPosts([newPost, ...posts]);
+        },
+        [posts]
+    );
 
     if (!user) {
         return <Login setUser={setUser} />;
@@ -17,20 +26,8 @@ function App() {
     return (
     <>
         <Header user={user} setUser={setUser} />
-        <CreatePost user={user} setPosts={setPosts} posts={posts} />
-        {posts.map((post, i) => (
-            <React.Fragment key={i}>
-                {post.image && (
-                    <img
-                        style={{ height: 100, width: 200, objectFit: 'cover' }}
-                        src={URL.createObjectURL(post.image)}
-                        alt="Post cover" 
-                    />
-                )}
-                <p>{post.content}</p>
-                <div>{user}</div>
-            </React.Fragment>
-        ))}
+        <CreatePost user={user} handleAddPost={handleAddPost} />
+        <PostList posts={posts} />
     </>
     );
 }
